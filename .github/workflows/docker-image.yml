@@ -23,6 +23,10 @@ jobs:
       with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
+          
+    - name: Get the version
+      id: version
+      run: echo ::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)
     
     - name: Build and push
       uses: docker/build-push-action@v3
@@ -30,4 +34,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64/v8
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloudflare-ddns:latest, ${{ secrets.DOCKERHUB_USERNAME }}/cloudflare-ddns:${{ github.event.release.tag_name }}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloudflare-ddns:latest, ${{ secrets.DOCKERHUB_USERNAME }}/cloudflare-ddns:${{ steps.version.outputs.VERSION }}
