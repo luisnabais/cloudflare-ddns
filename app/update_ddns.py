@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+
+import json
+import os
+import requests
+import sys
+import time
+from datetime import datetime
+
+IP_API = 'https://api.ipify.org?format=json'
+USE_PUBLIC_IP=True
+
+
+def print_ts(message):
+    dt = datetime.now()
+    str_date_time = dt.strftime("%Y-%m-%d %H:%M:%S")
+    print('[' + str_date_time + "] " + message)
+
+def get_public_ip():
+    print_ts("Getting current Public IP Address...")
+    try:
+        resp = requests.get(IP_API)
+    except requests.ConnectionError as err:
+        print_ts(str(err))
+        sys.exit(1)
+    
+    print_ts('Public IP address ' + resp.json()['ip'])
+    return resp.json()['ip']
+
+def get_records():
+    resp = requests.get(
+        'https://api.cloudflare.com/client/v4/zones/{}/dns_records'.format(os.environ['ZONE_ID']),
+        headers={
+            'X-Auth-Key':   os.environ['API_KEY'],
+            'X-Auth-Email': os.environ['EMAIL']
+        })
+    print_ts(json.dumps(resp.json(), indent=4, sort_keys=True))
+    print_ts('Please find the DNS record ID you would like to update and entry the value into the script')
+    sys.exit(0)
+
+
+########
+# MAIN #
+########
+
+while True:
+    if USE_PUBLIC_IP:
+        ip_addr = get_public_ip()
+    else:
+        ip_addr = os.environ['IP_ADDRESS']
+
+
+    if not os.environ['RECORD_ID']:
+        get_records()
+
+    resp = requests.put(
+        'https://api.cloudflare.com/client/v4/zones/{}/dns_records/{}'.format(
+            os.environ['ZONE_ID'], os.environ['RECORD_ID']),
+        json={
+            'type':    'A',
+            'name':    os.environ['HOSTNAME'],
+            'content': ip_addr,
+            'proxied': False
+        },
+        headers={
+            'X-Auth-Key':   os.environ['API_KEY'],
+            'X-Auth-Email': os.environ['EMAIL']
+        })
+    assert resp.status_code == 200
+
+    print_ts('Updated DNS record for {}'.format(ip_addr, os.environ['HOSTNAME']))
+
+
+    print_ts('Waiting ' + os.environ['TTL'] + ' seconds...')
+    time.sleep(int(os.environ['TTL']))
+    print()
