@@ -2,7 +2,8 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ master ]
+    tags:
+        - '*'
 
 jobs:
   build:
@@ -29,4 +30,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64/v8
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloudflare-ddns:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/cloudflare-ddns:latest, ${{ secrets.DOCKERHUB_USERNAME }}/cloudflare-ddns:${{ steps.meta.outputs.tags }}
