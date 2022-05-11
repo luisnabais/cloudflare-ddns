@@ -11,6 +11,6 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag luisnabais/cloudflare-ddns:1.0
+      run: docker build . --file Dockerfile --tag luisnabais/cloudflare-ddns:latest
     - name: Push Image to Docker Registry
       run: docker image push luisnabais/cloudflare-ddns:latest
