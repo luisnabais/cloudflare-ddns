@@ -6,12 +6,10 @@ This code consists on a few components:
 - docker-compose example file
 
 ## Supported Architectures
-
-It should support most architectures, however, I just built it for arm64v8.
+It should support most architectures, however, I just built it for amd64 and arm64v8.
 
 
 ## Usage
-
 Here are some example snippets to help you get started creating a container.
 
 ### docker-compose (recommended, [click here for more info](https://docs.linuxserver.io/general/docker-compose))
@@ -106,5 +104,4 @@ docker build \
   -t luisnabais/cloudflare-ddns:1.0 .
 ```
 ## Versions
-
 * **11.05.22:** - Initial Release.
