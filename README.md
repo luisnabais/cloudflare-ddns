@@ -49,14 +49,16 @@ docker run -d \
 
 ### Directly execution of the script
 
+The variables are expected to be environment variables, so first they need to be exported. You can use a basic shell script or just execute the commands (mind that executing the commands keeps them in history, if they are not cleaned up after).
 ```bash
-./update_ddns.py \
-	--email example@mail.com \
-    --api-key a8dd892bd2a0a69187358b1ce7f7cabc2f85 \
-	--hostname home.example.com \
-    --zone-id 6ef3e0abc8ad776905a522c2ceb6f7d0 \
-    --record-id 99ebe0933256654a8f0ec19d2a16fa50 \
-    --ttl 600
+export EMAIL="example@mail.com"
+export API_KEY="a8dd892bd2a0a69187358b1ce7f7cabc2f85"
+export HOSTNAME="home.example.com"
+export ZONE_ID="6ef3e0abc8ad776905a522c2ceb6f7d0"
+export RECORD_ID=99ebe0933256654a8f0ec19d2a16fa50
+export TTL="600"
+
+./update_ddns.py
 ```
 
 ## Parameters

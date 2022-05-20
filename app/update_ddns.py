@@ -49,8 +49,7 @@ while True:
     else:
         ip_addr = os.environ['IP_ADDRESS']
 
-
-    if not os.environ['RECORD_ID']:
+    if 'RECORD_ID' not in os.environ:
         get_records()
 
     resp = requests.put(
