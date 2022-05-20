@@ -55,7 +55,7 @@ export EMAIL="example@mail.com"
 export API_KEY="a8dd892bd2a0a69187358b1ce7f7cabc2f85"
 export HOSTNAME="home.example.com"
 export ZONE_ID="6ef3e0abc8ad776905a522c2ceb6f7d0"
-export RECORD_ID=99ebe0933256654a8f0ec19d2a16fa50
+export RECORD_ID="99ebe0933256654a8f0ec19d2a16fa50"
 export TTL="600"
 
 ./update_ddns.py
