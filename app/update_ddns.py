@@ -102,7 +102,7 @@ while True:
     try:
         assert resp.status_code == 200
     except AssertionError as err:
-        print('HTTP Error ' + str(resp.status_code) + ' while connecting to Cloudflare API. ' + str(resp.status_code))
+        print('HTTP Error ' + str(resp.status_code) + ' while connecting to Cloudflare API.')
 
     print_ts('Updated DNS record for {}'.format(ip_addr, os.environ['HOSTNAME']))
     save_current_ip(ip_addr)    
