@@ -98,7 +98,11 @@ while True:
             'X-Auth-Key':   os.environ['API_KEY'],
             'X-Auth-Email': os.environ['EMAIL']
         })
-    assert resp.status_code == 200
+
+    try:
+        assert resp.status_code == 200
+    except AssertionError as err:
+        print('HTTP Error ' + str(resp.status_code) + ' while connecting to Cloudflare API. ' + str(resp.status_code))
 
     print_ts('Updated DNS record for {}'.format(ip_addr, os.environ['HOSTNAME']))
     save_current_ip(ip_addr)    
