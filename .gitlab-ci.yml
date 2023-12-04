@@ -7,7 +7,7 @@ services:
 
 variables:
   DOCKER_REPO: 'luisnabais/cloudflare-ddns'
-  BUILDX_VERSION: "v0.11.2"
+  BUILDX_VERSION: "v0.12.0"
   BUILDX_URL: "https://github.com/docker/buildx/releases/download/${BUILDX_VERSION}/buildx-${BUILDX_VERSION}.linux-amd64"
   BUILDX_PLATFORMS: "linux/amd64,linux/arm64/v8"
 
