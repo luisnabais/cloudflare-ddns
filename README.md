@@ -19,7 +19,7 @@ Here are some example snippets to help you get started creating a container.
 version: '2.1'
 services:
   cloudflare-ddns:
-    image: luisnabais/cloudflare-ddns:1.0
+    image: luisnabais/cloudflare-ddns:1.3.0
     container_name: cloudflare-ddns
     hostname: cloudflare-ddns
     environment:
@@ -44,7 +44,7 @@ docker run -d \
   -e RECORD_ID=99ebe0933256654a8f0ec19d2a16fa50 \
   -e TTL=600 \
   --restart unless-stopped \
-  luisnabais/cloudflare-ddns:1.0
+  luisnabais/cloudflare-ddns:1.3.0
 ```
 
 ### Directly execution of the script
@@ -86,7 +86,7 @@ Below are the instructions for updating containers:
 
 ### Via Docker Run
 
-* Update the image: `docker pull luisnabais/cloudflare-ddns:1.0`
+* Update the image: `docker pull luisnabais/cloudflare-ddns:1.3.0`
 * Stop the running container: `docker stop cloudflare-ddns`
 * Delete the container: `docker rm cloudflare-ddns`
 * Recreate a new container with the same docker run parameters as instructed above.
@@ -103,7 +103,7 @@ cd docker-cloudflare-ddns
 docker build \
   --no-cache \
   --pull \
-  -t luisnabais/cloudflare-ddns:1.0 .
+  -t luisnabais/cloudflare-ddns:1.3.0 .
 ```
 ## Versions
 * **11.05.22:** - Initial Release.
